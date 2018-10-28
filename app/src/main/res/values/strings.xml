@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">HW4GeocodingApp</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="country">Country</string>
+    <string name="findButton">FIND</string>
     <string name="title_activity_maps">Map</string>
 </resources>
