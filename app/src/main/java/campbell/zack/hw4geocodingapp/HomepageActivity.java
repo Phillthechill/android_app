@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class HomepageActivity extends Activity {
+    public final static String EXTRA_MESSAGE = "com.MESSAGE";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,7 +17,9 @@ public class HomepageActivity extends Activity {
     public void findLoc(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
 
-        // USE putExtra() on the intent to send processed data to the map
+        EditText editText = (EditText) findViewById(R.id.Address);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE,message);
 
         startActivity(intent);
     }
