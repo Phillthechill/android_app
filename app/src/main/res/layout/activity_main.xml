@@ -7,37 +7,15 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="@string/city"
-        app:layout_constraintBottom_toTopOf="@+id/state"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/state"
+        android:id="@+id/Address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/state"
-        app:layout_constraintBottom_toTopOf="@+id/country"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/city" />
-
-    <EditText
-        android:id="@+id/country"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/country"
+        android:text="@string/address"
         app:layout_constraintBottom_toTopOf="@+id/findButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/state" />
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <Button
         android:id="@+id/findButton"
@@ -47,5 +25,5 @@
         android:onClick="findLoc"
         android:text="@string/findButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/country" />
+        app:layout_constraintTop_toBottomOf="@+id/Address" />
 </android.support.constraint.ConstraintLayout>
