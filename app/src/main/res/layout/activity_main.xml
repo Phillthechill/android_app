@@ -11,10 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/address"
-        app:layout_constraintBottom_toTopOf="@+id/findButton"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:inputType="textPostalAddress"
+        android:text="@string/address" />
 
 
     <Button

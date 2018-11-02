@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 public class HomepageActivity extends Activity {
-    public final static String EXTRA_MESSAGE = "com.MESSAGE";
+    public final static String EXTRA_MESSAGE = "";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,9 +17,9 @@ public class HomepageActivity extends Activity {
     public void findLoc(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
 
-        EditText editText = (EditText) findViewById(R.id.Address);
+        EditText editText = (EditText)findViewById(R.id.Address);
         String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE,message);
+        intent.putExtra(EXTRA_MESSAGE, message);
 
         startActivity(intent);
     }

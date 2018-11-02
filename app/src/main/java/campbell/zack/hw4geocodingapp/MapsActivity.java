@@ -1,6 +1,7 @@
 package campbell.zack.hw4geocodingapp;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -13,19 +14,24 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Scanner;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, AsyncResponse {
 
     private GoogleMap mMap;
     private String add;
+    private static String OUTPUT_JSON;
+    private static NetworkAsync task = new NetworkAsync();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        task.delegate = this;
 
         Intent intent = getIntent();
         add = intent.getStringExtra(HomepageActivity.EXTRA_MESSAGE);
@@ -52,9 +58,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             information place = geocodeMethod(add);
 
             // Add a marker in Sydney and move the camera
-            LatLng sydney = new LatLng(place.getLat(), place.getLng());
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker at "+ place.getLocation() ));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            LatLng loc = new LatLng(place.getLat(), place.getLng());
+            mMap.addMarker(new MarkerOptions().position(loc).title("Marker at "+ place.getLocation() ));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,20 +69,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public static information geocodeMethod (String address) throws Exception{
         //build URL
-        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-        url += URLEncoder.encode(address,"UTF-8");
-        //url +="&keyAIzaSyCdkxaCk2MUL1ayEU7eKHoYZ94FOUXLpNQ";
-        URL newURL = new URL(url);
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + URLEncoder.encode(address,"UTF-8") + "&key=AIzaSyCdkxaCk2MUL1ayEU7eKHoYZ94FOUXLpNQ";
 
-        Scanner scan = new Scanner(newURL.openStream());
-        String addy = new String();
-        while (scan.hasNext()){
-            addy += scan.nextLine();
-        }
-        scan.close();
+        String arry = task.execute(url).get();
 
-        JSONObject object = new JSONObject(addy);
-        if(! object.getString("status").equals("OK")){
+        JSONObject object = new JSONObject(arry);
+        if(!object.getString("status").equals("OK")){
             return null;
         }
 
@@ -84,5 +82,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         JSONObject location = result.getJSONObject("geometry").getJSONObject("location");
 
         return new information(location.getDouble("lat"),location.getDouble("lng"),result.getString("formatted_address"));
+    }
+
+    @Override
+    public void processFinish(String result) {
+        OUTPUT_JSON = result;
     }
 }
