@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Scanner;
@@ -39,6 +40,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        try {
+            String url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+            url += URLEncoder.encode(add,"UTF-8");
+            url +="&key=AIzaSyCeihitvV-5nX5Gk6p3iWbHVyYyIViEovI";
+            new NetworkAsync().execute(url);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -54,8 +65,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        information place;
+
         try {
-            information place = geocodeMethod(add);
+            place = geocodeMethod(HomepageActivity.Message);
 
             // Add a marker in Sydney and move the camera
             LatLng loc = new LatLng(place.getLat(), place.getLng());
@@ -68,12 +81,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public static information geocodeMethod (String address) throws Exception{
-        //build URL
-        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + URLEncoder.encode(address,"UTF-8") + "&key=AIzaSyCdkxaCk2MUL1ayEU7eKHoYZ94FOUXLpNQ";
 
-        String arry = task.execute(url).get();
-
-        JSONObject object = new JSONObject(arry);
+        JSONObject object = new JSONObject(address);
         if(!object.getString("status").equals("OK")){
             return null;
         }

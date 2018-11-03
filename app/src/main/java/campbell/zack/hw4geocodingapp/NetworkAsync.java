@@ -19,6 +19,7 @@ public class NetworkAsync extends AsyncTask<String, String, String> {
             while (scan.hasNext()){
                 addy += scan.nextLine();
             }
+            HomepageActivity.Message = addy;
             scan.close();
         } catch (Exception e) {
             e.getMessage();

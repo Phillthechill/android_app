@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 public class HomepageActivity extends Activity {
     public final static String EXTRA_MESSAGE = "";
+    public static String Message = new String();
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
