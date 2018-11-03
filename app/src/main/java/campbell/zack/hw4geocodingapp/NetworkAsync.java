@@ -19,7 +19,6 @@ public class NetworkAsync extends AsyncTask<String, String, String> {
             while (scan.hasNext()){
                 addy += scan.nextLine();
             }
-            HomepageActivity.Message = addy;
             scan.close();
         } catch (Exception e) {
             e.getMessage();
@@ -27,9 +26,4 @@ public class NetworkAsync extends AsyncTask<String, String, String> {
         return addy;
     }
 
-    @Override
-    protected void onPostExecute(String s) {
-        delegate.processFinish(s);
-        super.onPostExecute(s);
-    }
 }
