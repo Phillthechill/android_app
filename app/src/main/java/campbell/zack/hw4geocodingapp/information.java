@@ -1,17 +1,17 @@
 package campbell.zack.hw4geocodingapp;
 
 public class information {
-    double lat;
-    double lng;
+    Double lat;
+    Double lng;
     String location;
 
     public information(){
-        this.lat = 0.0;
-        this.lng = 0.0;
+        this.lat = 50.804630;
+        this.lng = 5.310860;
         this.location = " ";
     }
 
-    public information(double latitude, double longitude, String loc){
+    public information(Double latitude, Double longitude, String loc){
         this.lat = latitude;
         this.lng = longitude;
         this.location = loc;
@@ -29,11 +29,11 @@ public class information {
         this.location = location;
     }
 
-    public double getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public double getLng() {
+    public Double getLng() {
         return lng;
     }
 

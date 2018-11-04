@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">HW4GeocodingApp</string>
-    <string name="address">Address</string>
+    <string name="address">Enter Address Here</string>
     <string name="findButton">FIND</string>
+    <string name="elevation">Elevation:</string>
+    <string name="elevationButton">ELEVATION</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_homepage">HomepageActivity</string>
 </resources>
