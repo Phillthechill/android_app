@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class NetworkAsync extends AsyncTask<String, String, String> {
-    protected AsyncResponse delegate = null;
     @Override
     protected String doInBackground(String... strings) {
         String addy = "";

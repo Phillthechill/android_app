@@ -6,8 +6,8 @@ public class information {
     String location;
 
     public information(){
-        this.lat = 0.0;
-        this.lng = 0.0;
+        this.lat = 50.804630;
+        this.lng = 5.310860;
         this.location = " ";
     }
 

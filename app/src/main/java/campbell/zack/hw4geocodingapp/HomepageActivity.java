@@ -16,6 +16,7 @@ import static campbell.zack.hw4geocodingapp.MapsActivity.geocodeMethod;
 
 public class HomepageActivity extends Activity {
     public final static String EXTRA_MESSAGE = "";
+    private String GOOGLE_API_ADDRESS = "https://maps.googleapis.com/maps/api/";
     private String API_KEY = "AIzaSyCeihitvV-5nX5Gk6p3iWbHVyYyIViEovI";
 
     public void onCreate(Bundle savedInstanceState) {
@@ -38,14 +39,14 @@ public class HomepageActivity extends Activity {
             EditText editText = findViewById(R.id.Address);
             String message = editText.getText().toString();
 
-            String url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+            String url = GOOGLE_API_ADDRESS + "geocode/json?address=";
             url += URLEncoder.encode(message,"UTF-8");
             url +="&key=" + API_KEY;
 
             String hold = new NetworkAsync().execute(url).get();
             information loc = geocodeMethod(hold);
 
-            String eleURL = "https://maps.googleapis.com/maps/api/elevation/json?locations=";
+            String eleURL = GOOGLE_API_ADDRESS + "elevation/json?locations=";
             eleURL += loc.lat.toString() + "," + loc.lng.toString();
             eleURL +="&key=" + API_KEY;
 
@@ -56,9 +57,11 @@ public class HomepageActivity extends Activity {
 
             TextView elevationFeetText = findViewById(R.id.elevationFeet);
             TextView elevationMetersText = findViewById(R.id.elevationMeters);
+            TextView elevationTitle = findViewById(R.id.elevationTitle);
 
-            elevationFeetText.setText(elevationFeet.toString());
-            elevationMetersText.setText(elevationMeters.toString());
+            elevationTitle.setVisibility(View.VISIBLE);
+            elevationFeetText.setText(elevationFeet.toString() + " Feet");
+            elevationMetersText.setText(elevationMeters.toString() + " Meters");
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
