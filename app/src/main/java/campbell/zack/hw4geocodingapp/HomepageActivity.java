@@ -15,9 +15,12 @@ import java.net.URLEncoder;
 import static campbell.zack.hw4geocodingapp.MapsActivity.geocodeMethod;
 
 public class HomepageActivity extends Activity {
-    public final static String EXTRA_MESSAGE = "";
+    public final static String MAP_MESSAGE = "map";
+    public final static String GEOCODING_MESSAGE = "geocoding";
     private String GOOGLE_API_ADDRESS = "https://maps.googleapis.com/maps/api/";
     private String API_KEY = "AIzaSyCeihitvV-5nX5Gk6p3iWbHVyYyIViEovI";
+    public static String geocodingJSON;
+    private information loc;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +32,18 @@ public class HomepageActivity extends Activity {
 
         EditText editText = findViewById(R.id.Address);
         String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        intent.putExtra(MAP_MESSAGE, message);
 
         startActivity(intent);
+    }
+
+    public void displayGeocodingInfo(View view) {
+        if (geocodingJSON != null) {
+            Intent intent = new Intent(this, GeocodingInfo.class);
+            intent.putExtra(GEOCODING_MESSAGE, geocodingJSON);
+            startActivity(intent);
+        }
+
     }
 
     public void findElevation(View view) {
@@ -44,7 +56,8 @@ public class HomepageActivity extends Activity {
             url +="&key=" + API_KEY;
 
             String hold = new NetworkAsync().execute(url).get();
-            information loc = geocodeMethod(hold);
+            geocodingJSON = hold;
+            loc = geocodeMethod(hold);
 
             String eleURL = GOOGLE_API_ADDRESS + "elevation/json?locations=";
             eleURL += loc.lat.toString() + "," + loc.lng.toString();
@@ -74,7 +87,7 @@ public class HomepageActivity extends Activity {
         return meters * 3.2808;
     }
 
-    public static Double getEle(String address) throws Exception {
+    private static Double getEle(String address) throws Exception {
         JSONObject object = new JSONObject(address);
         if(! object.getString("status").equals("OK")){
             return null;

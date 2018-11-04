@@ -4,6 +4,11 @@
     <string name="findButton">FIND</string>
     <string name="elevation">Elevation:</string>
     <string name="elevationButton">ELEVATION</string>
+    <string name="latitudeTitle">Latitude:</string>
+    <string name="longitudeTitle">Longitude:</string>
+    <string name="placeIdentificationTitle">Place Id:</string>
+    <string name="typeOfLocationTitle">Type of Location:</string>
+    <string name="infoButton">Info</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_homepage">HomepageActivity</string>
 </resources>

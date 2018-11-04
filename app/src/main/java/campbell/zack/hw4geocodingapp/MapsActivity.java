@@ -32,7 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
         Intent intent = getIntent();
-        String add = intent.getStringExtra(HomepageActivity.EXTRA_MESSAGE);
+        String add = intent.getStringExtra(HomepageActivity.MAP_MESSAGE);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -43,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             url += URLEncoder.encode(add,"UTF-8");
             url +="&key=AIzaSyCeihitvV-5nX5Gk6p3iWbHVyYyIViEovI";
             String hold = new NetworkAsync().execute(url).get();
+            HomepageActivity.geocodingJSON = hold;
             place = geocodeMethod(hold);
 
         } catch (UnsupportedEncodingException e) {

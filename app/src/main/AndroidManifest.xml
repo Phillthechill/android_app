@@ -51,6 +51,13 @@
                 android:value=".HomepageActivity" />
 
         </activity>
+
+        <activity
+            android:name=".GeocodingInfo"
+            android:label="GeocodingInfo">
+
+        </activity>
+
     </application>
 
 </manifest>
